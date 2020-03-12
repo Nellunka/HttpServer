@@ -13,7 +13,8 @@ class HttpServer {
         "host_settings" => [
             "ip" => "127.0.0.1",
             "port" => 80
-        ]
+        ],
+        "server_name" => "JWS"
     ];
 
     public function __construct($ip = "127.0.0.1", $port = 80){
@@ -38,9 +39,9 @@ class HttpServer {
             while($ac = $this->webSocket->accept()){
                 try {
                     $response = new http_responses();
+                    $response->serverName = $this->server_settings["server_name"];
                     $in = $ac->getInput()->read(2**24);
                     $get = trim(" ".explode("GET", explode("HTTP", $in)[0])[1]." ");
-                    $result = "";
                     if($get == $request){
                         $runnable(new HttpRequest($in, $this->webSocket, $ac), new HttpResponse($response));
                     } else {
