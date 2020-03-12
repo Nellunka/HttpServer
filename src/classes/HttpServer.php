@@ -2,9 +2,7 @@
 namespace classes;
 
 use classes\http_responses;
-use classes\http_responses;
 use php\lang\Thread;
-use php\lang\Environment;
 use php\net\ServerSocket;
 use php\net\SocketException;
 
@@ -50,7 +48,7 @@ class HttpServer {
                     }
 
                     $ac->getOutput()->write($response->get_response());
-                    //$ac->close();
+                    $ac->close();
                 } catch (SocketException $e){
                     echo "Socket write error!: ".$e->getMessage()."\n";
                 }
