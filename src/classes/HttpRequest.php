@@ -21,7 +21,7 @@ class HttpRequest
     }
 
     public function get_request(){
-        return $this->request;
+        return trim(" ".explode("GET", explode("HTTP", $this->request)[0])[1]." ");
     }
 
     public function get_user_http_version(){
