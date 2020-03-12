@@ -2,6 +2,7 @@
 namespace classes;
 
 use classes\http_responses;
+use classes\http_responses;
 use php\lang\Thread;
 use php\lang\Environment;
 use php\net\ServerSocket;
@@ -37,18 +38,22 @@ class HttpServer {
     public function on_request($request, callable $runnable){
         new Thread(function () use ($request, $runnable){
             while($ac = $this->webSocket->accept()){
-                $response = new http_responses();
-                $in = $ac->getInput()->read(2**24);
-                $get = trim(" ".explode("GET", explode("HTTP", $in)[0])[1]." ");
-                $result = "";
-                if($get == $request){
-                    $runnable(new HttpRequest($in, $this->webSocket, $ac), new HttpResponse($response));
-                } else {
-                    $response->type = "400";
-                }
+                try {
+                    $response = new http_responses();
+                    $in = $ac->getInput()->read(2**24);
+                    $get = trim(" ".explode("GET", explode("HTTP", $in)[0])[1]." ");
+                    $result = "";
+                    if($get == $request){
+                        $runnable(new HttpRequest($in, $this->webSocket, $ac), new HttpResponse($response));
+                    } else {
+                        $response->type = "400";
+                    }
 
-                $ac->getOutput()->write($response->get_response());
-                $ac->close();
+                    $ac->getOutput()->write($response->get_response());
+                    //$ac->close();
+                } catch (SocketException $e){
+                    echo "Socket write error!: ".$e->getMessage()."\n";
+                }
             }
         })->start();
 
