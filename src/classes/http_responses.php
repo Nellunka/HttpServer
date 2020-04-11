@@ -255,7 +255,7 @@ class http_responses {
             $return .= $response."\n";
         }
         $return .= $this->content;
-
+		
         return str::encode($return, $this->charset);
     }
 

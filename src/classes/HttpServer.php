@@ -45,7 +45,7 @@ class HttpServer {
                     if($get == $request){
                         $runnable(new HttpRequest($in, $this->webSocket, $ac), new HttpResponse($response));
                     } else {
-                        $response->type = "400";
+                        $response->type = "404";
                     }
 
                     $ac->getOutput()->write($response->get_response());
