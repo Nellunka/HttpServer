@@ -86,7 +86,7 @@ class http_responses {
                 $response_arr[0] .= "305 Use Proxy";
                 break;
             case "306":
-                $response_arr[0] .= "306 — зарезервировано";
+                $response_arr[0] .= "306 Switch Proxy";
                 break;
             case "307":
                 $response_arr[0] .= "307 Temporary Redirect";
