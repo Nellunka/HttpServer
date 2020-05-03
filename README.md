@@ -1,11 +1,11 @@
 ﻿# HttpServer
-Позволяет запускать веб сервер на JPHP
+Allows you to run a web server on JPHP
 
-### Запуск
+### Launch
 ```MS-DOS Batch
 jppm app:run
 ```
-### Компиляция
+### Compilation
 ```MS-DOS Batch
 jppm build
 ```
